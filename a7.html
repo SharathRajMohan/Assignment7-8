@@ -1,0 +1,97 @@
+<!-- Name: Sharath Mohan  StudentID: C0894212 -->
+<html>
+	<head>
+		<title>Assignment7&8</title>
+		<style>
+			.table-cell {
+				border: 1px solid black;
+				padding: 8px; /* Optional: Add padding for better visibility */
+			}
+		</style>
+	</head>
+	<body>
+		<h1 style="font-size: 48px; color: green;" id="Heading" >Final test lab</h1><br><br>
+		Number of rows: <input type="text" id="t1" /><br><br>
+		Number of cols: <input type="text" id="t2" /><br><br>
+		
+		<button id="b1" onclick="generateTable()">Generate Table</button><br><br>
+		
+		<button id="b2" onclick="addColumn()">Add Column</button>
+		
+		<button id="b3" onclick="addRow()">Add Row</button>
+			
+		<script language="javascript">
+			function generateTable() {
+
+				var rows = document.getElementById("t1").value;
+				var cols = document.getElementById("t2").value;
+				if(rows == 0 || cols == 0){
+					alert("Please enter values for rows and columns.");
+				} else{
+					var table = document.createElement("table");
+
+					for (var i = 0; i < rows; i++) {
+						var row = table.insertRow(i);
+						for (var j = 0; j < cols; j++) {
+							var cell = row.insertCell(j);
+							cell.className = "table-cell"; // Add the CSS class to the cell
+						}
+					}
+
+					var buttonsDiv = document.createElement("div");
+					buttonsDiv.appendChild(document.getElementById("b2"));
+					buttonsDiv.appendChild(document.getElementById("b3"));
+
+					document.body.innerHTML = "";
+					document.body.appendChild(buttonsDiv);
+					document.body.appendChild(table);
+				}
+			}
+
+			function addColumn() {
+				var table = document.querySelector("table");
+				if(document.getElementById("Heading")!=null){
+					document.getElementById("t2").value++;
+				} else {
+					if (table.rows.length == 0){
+						table = document.createElement("table");
+						var newRow = table.insertRow();
+						var cell = newRow.insertCell(-1);
+
+						cell.className = "table-cell";
+						document.body.appendChild(table);
+					}
+					var rows = table.rows.length;
+
+					for (var i = 0; i < rows; i++) {
+						var cell = table.rows[i].insertCell(-1);
+						cell.className = "table-cell"; // Add the CSS class to the cell
+					}
+				}
+			}
+
+			function addRow() {
+				var table = document.querySelector("table");
+				if(document.getElementById("Heading")!=null){
+					document.getElementById("t1").value++;
+				} else {
+					if (table.rows.length == 0){
+						table = document.createElement("table");
+						var newRow = table.insertRow(-1);
+						var cell = newRow.insertCell(-1);
+
+						cell.className = "table-cell";
+						document.body.appendChild(table);
+					}
+					var cols = table.rows[0].cells.length;
+					var newRow = table.insertRow(-1);
+
+					for (var j = 0; j < cols; j++) {
+						var cell = newRow.insertCell(j);
+						cell.className = "table-cell"; // Add the CSS class to the cell
+					}
+				}
+			}
+		</script>
+	</body>
+</html>
